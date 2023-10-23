@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="cat.css">
+</head>
+<body>
+  <div class="container">
+    <h1>JavaScript Drag and Drop</h1>
+    <h2>Puzzle</h2>
+    <div class="content">
+      <div class=><img src="/images/beautiful cat.jpg" style="width: 300px;
+      height: 300px; margin-left: 40%;"></div>
+      <div class="images-drop">
+        <div class="images drops">
+          <img src="/imageonline/00.jpg" class="image" id="a" draggable="true">
+          <img src="/imageonline/01.jpg" class="image" id="b" draggable="true">
+          <img src="/imageonline/02.jpg" class="image" id="c" draggable="true">
+          <img src="/imageonline/10.jpg" class="image" id="d" draggable="true">
+          <img src="/imageonline/11.jpg" class="image" id="e" draggable="true">
+          <img src="/imageonline/12.jpg" class="image" id="f" draggable="true">
+          <img src="/imageonline/20.jpg" class="image" id="g" draggable="true">
+          <img src="/imageonline/21.jpg" class="image" id="h" draggable="true">
+          <img src="/imageonline/22.jpg" class="image" id="i" draggable="true">
+        </div>
+        <div class="drop">
+          <div class="a">
+            <div class="drops"></div>
+            <div class="drops"></div>
+            <div class="drops"></div>
+          </div>
+          <div class="a">
+            <div class="drops"></div>
+            <div class="drops"></div>
+            <div class="drops"></div>
+          </div>
+          <div class="a">
+            <div class="drops"></div>
+            <div class="drops"></div>
+            <div class="drops"></div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    let letters = document.querySelectorAll('.image');
+    letters.forEach(letter => {
+      letter.addEventListener('dragstart', dragStart);
+    });
+    function dragStart(ev){
+      ev.dataTransfer.setData('text', ev.target.id);
+      console.log('dragstart');
+      console.log(ev.target);
+    }
+    let drop = document.querySelectorAll('.drops');
+    drop.forEach(letter => {
+      letter.addEventListener('dragover', dragOver);
+    })
+    
+    function dragOver(ev){
+      ev.preventDefault();
+      console.log('over');
+      console.log(ev.target);
+    }
+    drop.forEach(letter =>{
+      letter.addEventListener('drop', Drop);
+    })
+    
+    function Drop(ev){
+      ev.preventDefault();
+      let id = ev.dataTransfer.getData('text');
+      ev.target.appendChild(document.getElementById(id));
+      console.log('dropped');
+      console.log(ev.target);
+    }
+    
+  </script>
+</body>
+</html>
